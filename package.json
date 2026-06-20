@@ -1,0 +1,31 @@
+{
+  "name": "braid-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --import tsx --test test/protocol/*.test.ts test/e2e/*.test.ts",
+    "test:protocol": "node --import tsx --test test/protocol/*.test.ts",
+    "test:e2e": "node --import tsx --test test/e2e/*.test.ts",
+    "test:go": "GOCACHE=$PWD/.cache/go-build GOMODCACHE=$PWD/.cache/go-mod go -C go/gnarkbridge test ./...",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run typecheck && npm run format:check && npm run test:go && npm run test:protocol",
+    "test:artifact": "npm run check && npm run test:e2e",
+    "benchmark": "node --import tsx scripts/benchmark_current.ts",
+    "demo": "node --import tsx examples/full_flow.ts"
+  },
+  "dependencies": {
+    "circomlibjs": "^0.1.7",
+    "ganache": "7.9.2",
+    "solc": "0.8.34",
+    "viem": "2.48.4"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
